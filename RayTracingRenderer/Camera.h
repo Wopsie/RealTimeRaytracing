@@ -15,6 +15,8 @@ public:
 	Camera() {};
 	Camera(const vec3& pos, const vec3& dir);
 	const vec3& GetPosition();
+	void TranslatePosition(vec3 offset);
+	void SetPosition(vec3 pos);
 	const vec3& GetLookDirection();
 	~Camera();
 
