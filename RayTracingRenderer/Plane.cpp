@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Plane.h"
 #include "IntersectionInfo.h"
+#include "ShadingInfo.h"
 #include "Ray.h"
 #include "Surface.h"
 #include "Material.h"
@@ -30,7 +31,7 @@ Plane::Plane(const vec3 & pos, const vec3 & inclination, const int& id, const ve
 	material.color = ambient;
 }
 
-bool Plane::GetIntersection(const Ray & ray, IntersectionInfo & info) const
+bool Plane::GetShadingInfo(const Ray & ray, ShadingInfo & info) const
 {
 	info.hit = false;
 	//check if intersection is happening at all
@@ -51,6 +52,26 @@ bool Plane::GetIntersection(const Ray & ray, IntersectionInfo & info) const
 		}
 	}
 	return info.hit;
+}
+
+std::shared_ptr<IntersectionInfo> Plane::GetIntersection(const Ray& ray) const
+{
+	//check if intersection is happening at all
+	float f = normal.dot(ray.GetDirection());
+	if (f <= 0) 
+	{
+		float planeDot = normal.dot(position);
+		float magnitude = (planeDot - normal.dot(ray.GetOrigin())) / normal.dot(ray.GetDirection());
+		if (magnitude < ray.GetMaxRange())
+		{
+			std::shared_ptr<IntersectionInfo> ii = std::make_shared<IntersectionInfo>();
+			ii->pSurface = this;
+			ii->distToRayOrigin = (ray.GetOrigin() - ray.PointOnLineAt(magnitude)).length();
+			ii->intersectPos = ray.PointOnLineAt(magnitude);
+			return ii;
+		}
+	}
+	return nullptr;
 }
 
 const Material & Plane::GetMaterial() const

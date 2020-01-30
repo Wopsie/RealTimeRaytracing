@@ -5,7 +5,7 @@ class BoundingSphere :
 {
 public:
 	BoundingSphere(const vec3& pos, const float& rad, std::vector<Hitable*> elements);
-	bool GetIntersection(const Ray& ray, IntersectionInfo& info) const;
+	bool GetIntersection(const Ray& ray, ShadingInfo& info) const;
 	const std::vector<Hitable*> GetVolumeContent() const;
 
 private: 

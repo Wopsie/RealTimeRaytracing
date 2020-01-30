@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "BoundingSphere.h"
 #include "IntersectionInfo.h"
+#include "ShadingInfo.h"
 #include "Ray.h"
 #include "Material.h"
 
@@ -17,7 +18,7 @@ BoundingSphere::BoundingSphere(const vec3 & pos, const float & rad, std::vector<
 	volumeContents = elements;
 }
 
-bool BoundingSphere::GetIntersection(const Ray & ray, IntersectionInfo & info) const
+bool BoundingSphere::GetIntersection(const Ray & ray, ShadingInfo & info) const
 {
 	info.hit = false;
 	//The length on the ray to the point closest to the sphere

@@ -1,6 +1,7 @@
 #pragma once
 #include "MathLibrary.h"
 #include "Scene.h"
+#include "ShadingInfo.h"
 #include "IntersectionInfo.h"
 #include <SFML/Graphics.hpp>
 
@@ -13,20 +14,20 @@ private:
 	void Init();
 	void Tick();
 	void Render(const mat4& camTrans);
-	void Trace();
+	//void Trace();
 	// Return pixel color
 	vec3 Trace(const Ray& ray);
+	vec3 Trace(const Ray& ray, const LightSource& target);
 	
-	void NearestIntersect(const Scene& s, const Ray& r);
-	void DirectIllumination();
+	std::shared_ptr<IntersectionInfo> NearestIntersect(const Scene& s, const Ray& r);
+	vec3 DirectIllumination(const IntersectionInfo& info);
 
 	void Draw();
 
-
-	const bool CastRay(const vec3& origin, const vec3& direction, IntersectionInfo& info, const float& maxDistance = INFINITY) const;
-	const bool CastRay(const vec3& origin, const vec3& direction, IntersectionInfo& info, const int& excludedID, const float& maxDistance = INFINITY) const;
+	const bool CastRay(const vec3& origin, const vec3& direction, ShadingInfo& info, const float& maxDistance = INFINITY) const;
+	const bool CastRay(const vec3& origin, const vec3& direction, ShadingInfo& info, const int& excludedID, const float& maxDistance = INFINITY) const;
 	const bool Refract(vec3& rayDirection, const vec3& normal, const float& refIndex);
-	const vec3 SurfaceShading(const IntersectionInfo& info, const vec3& rayOrigin = vec3());
+	const vec3 SurfaceShading(const ShadingInfo& info, const vec3& rayOrigin = vec3());
 	const float phongExponent = 256.0f;
 	const vec3 skyColor = vec3(0.2f, 0.2f, 1.0f);
 	vec3 litPointColor;

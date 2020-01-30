@@ -196,7 +196,7 @@ float vec3::operator[](int a_Index) const
 
 float & vec3::operator[](int a_Index)
 {
-	assert(a_Index < 3 && a_Index > 0);
+	//assert(a_Index < 3 && a_Index > 0);
 	return v[a_Index];
 }
 

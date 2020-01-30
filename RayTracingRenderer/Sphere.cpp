@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "Sphere.h"
 #include "Ray.h"
+#include "ShadingInfo.h"
 #include "IntersectionInfo.h"
 #include "Material.h"
+#include "Surface.h"
 #include <cmath>
 
 Sphere::Sphere()
@@ -29,7 +31,7 @@ Sphere::Sphere(const vec3 & pos, const float & rad, const int& id, const Materia
 	material = mat;
 }
 
-bool Sphere::GetIntersection(const Ray & ray, IntersectionInfo & info) const
+bool Sphere::GetShadingInfo(const Ray & ray, ShadingInfo & info) const
 {
 	info.hit = false;
 	//The length on the ray to the point closest to the sphere
@@ -59,6 +61,32 @@ bool Sphere::GetIntersection(const Ray & ray, IntersectionInfo & info) const
 	}
 
 	return info.hit;
+}
+
+std::shared_ptr<IntersectionInfo> Sphere::GetIntersection(const Ray& ray) const
+{
+	//The length on the ray to the point closest to the sphere
+	float magnitude = ray.GetDirection().dot(position - ray.GetOrigin());
+	if (magnitude > 0)
+	{
+		//Get the distance between the point along the ray at length and the sphere center
+		float distanceToSphere = (position - ray.PointOnLineAt(magnitude)).length();
+		if (distanceToSphere < radius)
+		{
+			//The ray has hit this object
+			const float centerToSurfaceDist = sqrtf(powf(radius, 2) - powf(distanceToSphere, 2));
+			const float lengthToSurface = magnitude - centerToSurfaceDist;
+			if (lengthToSurface < ray.GetMaxRange())
+			{
+				std::shared_ptr<IntersectionInfo> ii = std::make_shared<IntersectionInfo>();
+				ii->pSurface = this;
+				ii->distToRayOrigin = lengthToSurface;
+				ii->intersectPos = ray.PointOnLineAt(lengthToSurface);
+				return ii;
+			}
+		}
+	}
+	return nullptr;
 }
 
 const Material& Sphere::GetMaterial() const

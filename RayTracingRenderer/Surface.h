@@ -3,12 +3,14 @@
 #include "Material.h"
 class vec3;
 class Ray;
+struct ShadingInfo;
 struct IntersectionInfo;
 
 class Surface: public Hitable 
 {
 public:
-	virtual bool GetIntersection(const Ray& ray, IntersectionInfo& info) const = 0;
+	virtual bool GetShadingInfo(const Ray& ray, ShadingInfo& info) const = 0;
+	virtual std::shared_ptr<IntersectionInfo> GetIntersection(const Ray& ray) const = 0;
 	virtual const Material& GetMaterial() const = 0;
 	virtual const int& GetIdentifier() const = 0;
 

@@ -6,7 +6,7 @@ struct IntersectionInfo;
 class Hitable
 {
 public:
-	virtual bool GetIntersection(const Ray& ray, IntersectionInfo& info) const = 0;
+	virtual std::shared_ptr<IntersectionInfo> GetIntersection(const Ray& ray) const = 0;
 
 protected: 
 	vec3 position;

@@ -5,7 +5,7 @@
 #include "Hitable.h"
 #include <vector>
 
-struct IntersectionInfo;
+struct ShadingInfo;
 class BoundingVolume : public Hitable
 {
 public:
