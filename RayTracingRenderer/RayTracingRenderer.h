@@ -11,7 +11,7 @@ public:
 
 private:
 	void Init();
-	void Tick(float& dt);
+	void Tick();
 	void Render(const mat4& camTrans);
 	void Trace();
 	// Return pixel color
@@ -36,6 +36,9 @@ private:
 	int objectIdentifier = 1;
 	bool quitting = false;
 	sf::Image viewport;
+	sf::RenderWindow* window;
 	vec2 viewportSize = vec2(512, 512);
 	Scene scene = Scene();
+
+
 };
