@@ -1,7 +1,6 @@
 #pragma once
 #include "Surface.h"
 #include "Material.h"
-#include "MathLibrary.h"
 #include "Hitable.h"
 #include <vector>
 

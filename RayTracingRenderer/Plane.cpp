@@ -10,11 +10,11 @@
 Plane::Plane()
 	: Surface(1)
 {
-	position = vec3();
-	normal = vec3(0, -1, 0);
+	position = glm::vec3();
+	normal = glm::vec3(0, -1, 0);
 }
 
-Plane::Plane(const vec3 & pos, const vec3 & inclination, const int& id, const Material & mat)
+Plane::Plane(const glm::vec3 & pos, const glm::vec3 & inclination, const int& id, const Material & mat)
 	: Surface(id)
 {
 	position = pos;
@@ -22,7 +22,7 @@ Plane::Plane(const vec3 & pos, const vec3 & inclination, const int& id, const Ma
 	material = mat;
 }
 
-Plane::Plane(const vec3 & pos, const vec3 & inclination, const int& id, const vec3& ambient)
+Plane::Plane(const glm::vec3 & pos, const glm::vec3 & inclination, const int& id, const glm::vec3& ambient)
 	: Surface(id)
 {
 	position = pos;
@@ -35,11 +35,13 @@ bool Plane::GetShadingInfo(const Ray & ray, ShadingInfo & info) const
 {
 	info.hit = false;
 	//check if intersection is happening at all
-	float f = normal.dot(ray.GetDirection());
+	float f = dot(normal, ray.GetDirection());
 	if (f <= 0) 
 	{
-		float planeDot = normal.dot(position);
-		float magnitude = (planeDot - normal.dot(ray.GetOrigin())) / normal.dot(ray.GetDirection());
+#pragma warning (push)
+#pragma warning ( disable : 4244)
+		float planeDot = dot(normal, position);
+		float magnitude = dot(planeDot - normal, ray.GetOrigin()) / dot(normal, ray.GetDirection());
 		if (magnitude < ray.GetMaxRange())
 		{
 			info.normal = normal;
@@ -51,17 +53,20 @@ bool Plane::GetShadingInfo(const Ray & ray, ShadingInfo & info) const
 			info.renderable = true;
 		}
 	}
+#pragma warning (pop)
 	return info.hit;
 }
 
 std::shared_ptr<IntersectionInfo> Plane::GetIntersection(const Ray& ray) const
 {
 	//check if intersection is happening at all
-	float f = normal.dot(ray.GetDirection());
+	float f = dot(normal, ray.GetDirection());
 	if (f <= 0) 
 	{
-		float planeDot = normal.dot(position);
-		float magnitude = (planeDot - normal.dot(ray.GetOrigin())) / normal.dot(ray.GetDirection());
+#pragma warning (push)
+#pragma warning ( disable : 4244)
+		float planeDot = dot(normal, position);
+		float magnitude = dot(planeDot - normal, ray.GetOrigin()) / dot(normal, ray.GetDirection());
 		if (magnitude < ray.GetMaxRange())
 		{
 			std::shared_ptr<IntersectionInfo> ii = std::make_shared<IntersectionInfo>();
@@ -71,6 +76,7 @@ std::shared_ptr<IntersectionInfo> Plane::GetIntersection(const Ray& ray) const
 			return ii;
 		}
 	}
+#pragma warning (pop)
 	return nullptr;
 }
 

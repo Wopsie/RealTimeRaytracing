@@ -1,9 +1,12 @@
 #pragma once
-#include "MathLibrary.h"
 #include "Scene.h"
 #include "ShadingInfo.h"
 #include "IntersectionInfo.h"
 #include <SFML/Graphics.hpp>
+#include "glm/matrix.hpp"
+#include "glm/vec3.hpp"
+#include "glm/vec2.hpp"
+
 
 class RayTracingRenderer
 {
@@ -13,24 +16,23 @@ public:
 private:
 	void Init();
 	void Tick();
-	void Render(const mat4& camTrans);
-	//void Trace();
-	// Return pixel color
-	vec3 Trace(const Ray& ray);
-	vec3 Trace(const Ray& ray, const LightSource& target);
+	//void Render(const glm::vec4& camTrans);
+	void Render(const glm::mat4& camTrans);
+	glm::vec3 Trace(const Ray& ray);
+	glm::vec3 Trace(const Ray& ray, const LightSource& target);
 	
 	std::shared_ptr<IntersectionInfo> NearestIntersect(const Scene& s, const Ray& r);
-	vec3 DirectIllumination(const IntersectionInfo& info);
+	glm::vec3 DirectIllumination(const IntersectionInfo& info);
 
 	void Draw();
 
-	const bool CastRay(const vec3& origin, const vec3& direction, ShadingInfo& info, const float& maxDistance = INFINITY) const;
-	const bool CastRay(const vec3& origin, const vec3& direction, ShadingInfo& info, const int& excludedID, const float& maxDistance = INFINITY) const;
-	const bool Refract(vec3& rayDirection, const vec3& normal, const float& refIndex);
-	const vec3 SurfaceShading(const ShadingInfo& info, const vec3& rayOrigin = vec3());
+	const bool CastRay(const glm::vec3& origin, const glm::vec3& direction, ShadingInfo& info, const float& maxDistance = INFINITY) const;
+	const bool CastRay(const glm::vec3& origin, const glm::vec3& direction, ShadingInfo& info, const int& excludedID, const float& maxDistance = INFINITY) const;
+	const bool Refract(glm::vec3& rayDirection, const glm::vec3& normal, const float& refIndex);
+	const glm::vec3 SurfaceShading(const ShadingInfo& info, const glm::vec3& rayOrigin = glm::vec3());
 	const float phongExponent = 256.0f;
-	const vec3 skyColor = vec3(0.2f, 0.2f, 1.0f);
-	vec3 litPointColor;
+	const glm::vec3 skyColor = glm::vec3(0.2f, 0.2f, 1.0f);
+	glm::vec3 litPointColor;
 	const int maxRecursionDepth = 3;
 	int reflectionRecursionDepth = 0;
 	int refractionRecursionDepth = 0; //this should be an even number
@@ -38,7 +40,7 @@ private:
 	bool quitting = false;
 	sf::Image viewport;
 	sf::RenderWindow* window;
-	vec2 viewportSize = vec2(512, 512);
+	glm::vec2 viewportSize = glm::vec2(512, 512);
 	Scene scene = Scene();
 
 

@@ -1,10 +1,10 @@
 #pragma once
 #include "Surface.h"
-#include "MathLibrary.h"
+#include "glm/vec3.hpp"
 
 struct IntersectionInfo 
 {
 	const Surface* pSurface = nullptr;
-	vec3 intersectPos = vec3();
+	glm::vec3 intersectPos = glm::vec3();
 	float distToRayOrigin = 0;
 };

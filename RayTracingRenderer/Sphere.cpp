@@ -10,11 +10,11 @@
 Sphere::Sphere()
 	: Surface(1)
 {
-	position = vec3();
+	position = glm::vec3();
 	radius = 1;
 }
 
-Sphere::Sphere(const vec3& pos, const float& rad, const int& id, const vec3& ambient)
+Sphere::Sphere(const glm::vec3& pos, const float& rad, const int& id, const glm::vec3& ambient)
 	: Surface(id)
 {
 	position = pos;
@@ -23,7 +23,7 @@ Sphere::Sphere(const vec3& pos, const float& rad, const int& id, const vec3& amb
 	material.color = ambient;
 }
 
-Sphere::Sphere(const vec3 & pos, const float & rad, const int& id, const Material & mat)
+Sphere::Sphere(const glm::vec3 & pos, const float & rad, const int& id, const Material & mat)
 	: Surface(id)
 {
 	position = pos;
@@ -35,11 +35,14 @@ bool Sphere::GetShadingInfo(const Ray & ray, ShadingInfo & info) const
 {
 	info.hit = false;
 	//The length on the ray to the point closest to the sphere
-	float magnitude = ray.GetDirection().dot(position - ray.GetOrigin());
+	float magnitude = dot(ray.GetDirection(), position - ray.GetOrigin());
 	if (magnitude > 0)
 	{
+#pragma warning (push)
+#pragma warning ( disable : 4244)
 		//Get the distance between the point along the ray at length and the sphere center
 		float distanceToSphere = (position - ray.PointOnLineAt(magnitude)).length();
+#pragma warning(pop)
 		if (distanceToSphere < radius)
 		{
 			//The ray has hit this object
@@ -48,9 +51,9 @@ bool Sphere::GetShadingInfo(const Ray & ray, ShadingInfo & info) const
 			if (lengthToSurface < ray.GetMaxRange())
 			{
 				info.position = ray.PointOnLineAt(lengthToSurface);
-				info.normal = (ray.PointOnLineAt(lengthToSurface) - position).normalize();
+				info.normal = normalize(ray.PointOnLineAt(lengthToSurface) - position);
 				info.mirrorPosition = ray.PointOnLineAt(lengthToSurface);
-				info.mirrorNormal = (position - info.mirrorPosition).normalize();
+				info.mirrorNormal = normalize(position - info.mirrorPosition);
 				info.distance = lengthToSurface;
 				info.material = GetMaterial();
 				info.surface = this;
@@ -66,11 +69,14 @@ bool Sphere::GetShadingInfo(const Ray & ray, ShadingInfo & info) const
 std::shared_ptr<IntersectionInfo> Sphere::GetIntersection(const Ray& ray) const
 {
 	//The length on the ray to the point closest to the sphere
-	float magnitude = ray.GetDirection().dot(position - ray.GetOrigin());
+	float magnitude = dot(ray.GetDirection(), (position - ray.GetOrigin()));	//goes wrong here
 	if (magnitude > 0)
 	{
+#pragma warning (push)
+#pragma warning ( disable : 4244)
 		//Get the distance between the point along the ray at length and the sphere center
 		float distanceToSphere = (position - ray.PointOnLineAt(magnitude)).length();
+#pragma warning(pop)
 		if (distanceToSphere < radius)
 		{
 			//The ray has hit this object

@@ -1,19 +1,19 @@
 #pragma once
-#include "MathLibrary.h"
+#include "glm/vec3.hpp"
 
 class Ray
 {
 public:
-	Ray(const vec3& pos, const vec3& dir);
-	Ray(const vec3& pos, const vec3& dir, const float& distance = INFINITY);
-	const vec3& GetOrigin() const;
-	const vec3& GetDirection() const;
+	Ray(const glm::vec3& pos, const glm::vec3& dir);
+	Ray(const glm::vec3& pos, const glm::vec3& dir, const float& distance = INFINITY);
+	const glm::vec3& GetOrigin() const;
+	const glm::vec3& GetDirection() const;
 	const float& GetMaxRange() const;
-	const vec3 PointOnLineAt(float magnitude) const;
+	const glm::vec3 PointOnLineAt(float magnitude) const;
 	~Ray();
 private:
-	const vec3 direction;
-	const vec3 origin;
+	const glm::vec3 direction;
+	const glm::vec3 origin;
 	const float range;
 };
 

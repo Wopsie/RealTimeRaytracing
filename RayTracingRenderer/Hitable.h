@@ -1,5 +1,7 @@
 #pragma once
-#include "MathLibrary.h"
+#include <memory>
+#include "glm/vec3.hpp"
+
 class Ray;
 struct IntersectionInfo;
 
@@ -9,6 +11,6 @@ public:
 	virtual std::shared_ptr<IntersectionInfo> GetIntersection(const Ray& ray) const = 0;
 
 protected: 
-	vec3 position;
+	glm::vec3 position = glm::vec3();
 };
 

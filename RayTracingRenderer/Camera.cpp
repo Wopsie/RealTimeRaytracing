@@ -1,28 +1,28 @@
 #include "stdafx.h"
 #include "Camera.h"
 
-Camera::Camera(const vec3& pos, const vec3& dir) 
+Camera::Camera(const glm::vec3& pos, const glm::vec3& dir) 
 {
 	position = pos;
 	direction = dir;
 }
 
-const vec3& Camera::GetPosition()
+const glm::vec3& Camera::GetPosition()
 {
 	return position;
 }
 
-void Camera::TranslatePosition(vec3 offset)
+void Camera::TranslatePosition(glm::vec3 offset)
 {
 	position += offset;
 }
 
-void Camera::SetPosition(vec3 pos)
+void Camera::SetPosition(glm::vec3 pos)
 {
 	position = pos;
 }
 
-const vec3& Camera::GetLookDirection()
+const glm::vec3& Camera::GetLookDirection()
 {
 	return direction;
 }

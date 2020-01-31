@@ -11,7 +11,7 @@
 //}
 
 
-BoundingSphere::BoundingSphere(const vec3 & pos, const float & rad, std::vector<Hitable*> elements)
+BoundingSphere::BoundingSphere(const glm::vec3 & pos, const float & rad, std::vector<Hitable*> elements)
 {
 	position = pos;
 	radius = rad;
@@ -22,11 +22,14 @@ bool BoundingSphere::GetIntersection(const Ray & ray, ShadingInfo & info) const
 {
 	info.hit = false;
 	//The length on the ray to the point closest to the sphere
-	float magnitude = ray.GetDirection().dot(position - ray.GetOrigin());
+	float magnitude = dot(ray.GetDirection(), (position - ray.GetOrigin()));
 	if (magnitude > 0)
 	{
+#pragma warning (push)
+#pragma warning ( disable : 4244)
 		//Get the distance between the point along the ray at length and the sphere center
 		float distanceToSphere = (position - ray.PointOnLineAt(magnitude)).length();
+#pragma warning (pop)
 		if (distanceToSphere < radius)
 		{
 			//The ray has hit the bounding sphere

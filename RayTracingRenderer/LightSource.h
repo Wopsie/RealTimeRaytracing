@@ -1,5 +1,6 @@
 #pragma once
-#include "MathLibrary.h"
+#include "glm/vec3.hpp"
+#include "glm/geometric.hpp"
 
 enum class LightType
 {
@@ -13,21 +14,21 @@ class LightSource
 {
 public:
 	LightSource();
-	LightSource(const vec3& pos, const vec3& dir, const vec3& tint = vec3(1,1,1), LightType t = LightType::Point);
-	const vec3& GetPosition() const;
-	const vec3 GetDirection(const vec3& point) const;
+	LightSource(const glm::vec3& pos, const glm::vec3& dir, const glm::vec3& tint = glm::vec3(1,1,1), LightType t = LightType::Point);
+	const glm::vec3& GetPosition() const;
+	const glm::vec3 GetDirection(const glm::vec3& point) const;
 	const LightType& GetType() const;
-	const vec3& GetColor() const;
+	const glm::vec3& GetColor() const;
 	const float& GetRange() const;
-	const vec3& GetIntensity() const;
+	const glm::vec3& GetIntensity() const;
 	~LightSource();
 
 private:
-	vec3 position;
-	vec3 direction;
-	vec3 color = vec3(1,1,1);	//white by default
-	float range;
-	vec3 intensity = vec3(1,1,1);
+	glm::vec3 position;
+	glm::vec3 direction;
+	glm::vec3 color = glm::vec3(1,1,1);	//white by default
+	float range = 0;
+	glm::vec3 intensity = glm::vec3(1,1,1);
 	LightType type;
 };
 
