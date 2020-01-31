@@ -3,6 +3,7 @@
 
 Camera::Camera(const glm::vec3& pos, const glm::vec3& dir) 
 {
+	//transform = Transform();
 	position = pos;
 	direction = dir;
 }
@@ -14,7 +15,7 @@ const glm::vec3& Camera::GetPosition()
 
 void Camera::TranslatePosition(glm::vec3 offset)
 {
-	position += offset;
+	position += (offset * 100.f);
 }
 
 void Camera::SetPosition(glm::vec3 pos)
@@ -24,6 +25,7 @@ void Camera::SetPosition(glm::vec3 pos)
 
 const glm::vec3& Camera::GetLookDirection()
 {
+	//glm::mat4 mat;
 	return direction;
 }
 

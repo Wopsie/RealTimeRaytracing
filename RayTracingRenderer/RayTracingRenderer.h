@@ -6,6 +6,7 @@
 #include "glm/matrix.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec2.hpp"
+#include "Sphere.h"
 
 
 class RayTracingRenderer
@@ -16,7 +17,6 @@ public:
 private:
 	void Init();
 	void Tick();
-	//void Render(const glm::vec4& camTrans);
 	void Render(const glm::mat4& camTrans);
 	glm::vec3 Trace(const Ray& ray);
 	glm::vec3 Trace(const Ray& ray, const LightSource& target);
@@ -40,8 +40,9 @@ private:
 	bool quitting = false;
 	sf::Image viewport;
 	sf::RenderWindow* window;
-	glm::vec2 viewportSize = glm::vec2(512, 512);
+	const glm::vec2 viewportSize = glm::vec2(512, 512);
 	Scene scene = Scene();
 
-
+	//test
+	Sphere sphere = Sphere(glm::vec3(0,0,-100), 10);
 };

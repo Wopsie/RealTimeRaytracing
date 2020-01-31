@@ -13,6 +13,7 @@ public:
 	virtual std::shared_ptr<IntersectionInfo> GetIntersection(const Ray& ray) const = 0;
 	virtual const Material& GetMaterial() const = 0;
 	virtual const int& GetIdentifier() const = 0;
+	glm::vec3 GetPosition() { return position; };
 
 protected:
 	Surface(const int id) : objID(id) {};
