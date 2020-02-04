@@ -6,8 +6,8 @@
 #include "glm/matrix.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec2.hpp"
+#include "Primitive.h"
 #include "Sphere.h"
-
 
 class RayTracingRenderer
 {

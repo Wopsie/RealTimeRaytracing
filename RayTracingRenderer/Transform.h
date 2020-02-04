@@ -26,6 +26,10 @@ struct Transform {
 			glm::vec4(translationVector, 1));*/
 	};
 
+	void Rotate(glm::vec3 rotationVector) {
+		modelMat = glm::rotate(modelMat, static_cast<float>(rotationVector.length()), glm::normalize(rotationVector));
+	}
+
 	/*void SetPosition(glm::vec3 pos) 
 	{
 		modelMat = glm::mat4(

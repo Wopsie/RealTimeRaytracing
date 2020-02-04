@@ -1,13 +1,16 @@
 #pragma once
 #include <memory>
-class Transform;
+#include "Transform.h"
+
+
+//struct Transform;
 class Ray;
 
 class Primitive
 {
 public:
 	std::shared_ptr<Transform> const GetTransform() { return transform; };
-	virtual bool GetIntersection(const Ray& ray) const = 0;
+	virtual bool GetIntersection(float& magnitude, const Ray& ray) = 0;
 
 private:
 	std::shared_ptr<Transform> transform = std::make_shared<Transform>();

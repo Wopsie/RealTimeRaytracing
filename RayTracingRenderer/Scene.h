@@ -3,6 +3,7 @@
 #include "glm/matrix.hpp"
 #include <vector>
 #include <iostream>
+#include <memory>
 
 class Surface;
 class LightSource;
