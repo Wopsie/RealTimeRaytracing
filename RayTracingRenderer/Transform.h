@@ -18,27 +18,11 @@ struct Transform {
 
 	void Translate(glm::vec3 translationVector) {
 		modelMat = glm::translate(modelMat, translationVector);
-
-		/*modelMat *= glm::mat4(
-			glm::vec4(1, 0, 0, 0),
-			glm::vec4(0, 1, 0, 0),
-			glm::vec4(0, 0, 1, 0),
-			glm::vec4(translationVector, 1));*/
 	};
 
 	void Rotate(glm::vec3 rotationVector) {
 		modelMat = glm::rotate(modelMat, static_cast<float>(rotationVector.length()), glm::normalize(rotationVector));
 	}
-
-	/*void SetPosition(glm::vec3 pos) 
-	{
-		modelMat = glm::mat4(
-			glm::vec4(modelMat[0], modelMat[0]., modelMat[0], modelMat[0]),
-			glm::vec4(0, 1, 0, 0),
-			glm::vec4(0, 0, 1, 0),
-			glm::vec4(translationVector, 1));
-	}*/
-
 	//void LookAtPoint(glm::vec3 rotationVector) 
 	//{
 	//	//glm::lookAt()
