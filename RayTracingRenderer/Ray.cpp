@@ -49,5 +49,10 @@ void Ray::SetDirection(glm::vec3 d)
 	direction = d;
 }
 
+void Ray::SetRange(float f)
+{
+	range = f;
+}
+
 Ray::~Ray()
 {}

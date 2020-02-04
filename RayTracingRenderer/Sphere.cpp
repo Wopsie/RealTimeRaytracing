@@ -132,8 +132,8 @@ bool Sphere::GetIntersection(float& a_T, const Ray& ray)
         return false; // r2 = r * r
 
     t -= sqrt(m_Radius2 - p2);
-    //if ((t < a_T) && (t > 0)) {
-    if ((t > 0)) {
+    if ((t < a_T) && (t > 0)) {
+    //if ((t > 0)) {
         a_T = t;
         return true;
     }

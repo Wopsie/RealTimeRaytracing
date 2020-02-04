@@ -13,6 +13,7 @@ public:
 	const glm::vec3 PointOnLineAt(float magnitude) const;
 	void SetOrigin(glm::vec3 o);
 	void SetDirection(glm::vec3 d);
+	void SetRange(float f);
 
 	~Ray();
 private:
