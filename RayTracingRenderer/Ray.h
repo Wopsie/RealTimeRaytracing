@@ -4,7 +4,7 @@
 class Ray
 {
 public:
-	Ray() {};
+	Ray() { direction = glm::vec3(0); origin = glm::vec3(0); range = INFINITY; };
 	Ray(glm::vec3 pos, glm::vec3 dir);
 	Ray(glm::vec3 pos, glm::vec3 dir, const float& distance);
 	const glm::vec3& GetOrigin() const;

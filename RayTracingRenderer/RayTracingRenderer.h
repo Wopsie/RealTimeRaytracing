@@ -21,7 +21,7 @@ private:
 	glm::vec3 Trace(const Ray& ray);
 	glm::vec3 Trace(const Ray& ray, const LightSource& target);
 	
-	std::shared_ptr<IntersectionInfo> NearestIntersect(const Scene& s, const Ray& r);
+	const float NearestIntersect(std::vector<std::shared_ptr<Primitive>> primitives, const Ray& r);
 	glm::vec3 DirectIllumination(const IntersectionInfo& info);
 
 	void Draw();
@@ -43,6 +43,9 @@ private:
 	const glm::vec2 viewportSize = glm::vec2(512, 512);
 	Scene scene = Scene();
 
+	float framerateInterval = 0;
+
 	//test
-	Sphere sphere = Sphere(glm::vec3(0, 0, 5), 0.5f);
+	//Sphere sphere = Sphere(glm::vec3(0, 0, 5), 0.5f);
+	std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(glm::vec3(0, 0, 5), 0.5f);
 };

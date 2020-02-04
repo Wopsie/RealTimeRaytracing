@@ -5,13 +5,15 @@
 #include <iostream>
 #include <memory>
 
-class Surface;
+class Primitive;
+//class Surface;
 class LightSource;
 class BoundingVolume;
 struct Scene
 {
 	Scene() { std::cout << "New Scene" << std::endl; };
-	std::vector<Surface*> surfaceList;
+	//std::vector<Surface*> surfaceList;
+	std::vector<std::shared_ptr<Primitive>> primitives; 
 	std::vector<LightSource> lightsList;
 	const float ambientLightIntensity = 0.03f;
 	const float baseRefractiveIndex = 1.2f;

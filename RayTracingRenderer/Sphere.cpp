@@ -113,6 +113,14 @@
 //}
 //
 
+
+Sphere::Sphere(glm::vec3 a_Position, float a_Radius)
+{
+    m_Position = a_Position;
+    m_Radius2 = a_Radius * a_Radius;
+}
+
+
 bool Sphere::GetIntersection(float& a_T, const Ray& ray)
 {
     glm::vec3 C = m_Position - ray.GetOrigin();
@@ -124,7 +132,8 @@ bool Sphere::GetIntersection(float& a_T, const Ray& ray)
         return false; // r2 = r * r
 
     t -= sqrt(m_Radius2 - p2);
-    if ((t < a_T) && (t > 0)) {
+    //if ((t < a_T) && (t > 0)) {
+    if ((t > 0)) {
         a_T = t;
         return true;
     }

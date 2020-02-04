@@ -36,9 +36,3 @@ public:
 
     bool GetIntersection(float& a_T, const Ray& ray);
 };
-
-inline Sphere::Sphere(glm::vec3 a_Position, float a_Radius)
-{
-    m_Position = a_Position;
-    m_Radius2 = a_Radius * a_Radius;
-}
