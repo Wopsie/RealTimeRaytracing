@@ -12,7 +12,7 @@ public:
 	void TranslatePosition(glm::vec3 offset);
 	void SetPosition(glm::vec3 pos);
 
-	const Transform& GetTransform() { return transform; };
+	Transform& GetTransform() { return transform; };
 
 	const glm::vec3& GetLookDirection();
 	~Camera();

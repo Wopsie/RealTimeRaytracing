@@ -44,5 +44,5 @@ private:
 	Scene scene = Scene();
 
 	//test
-	Sphere sphere = Sphere(glm::vec3(0,0,-100), 10);
+	Sphere sphere = Sphere(glm::vec3(0, 0, 5), 0.5f);
 };

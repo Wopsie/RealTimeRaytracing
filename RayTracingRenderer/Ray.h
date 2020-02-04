@@ -4,16 +4,20 @@
 class Ray
 {
 public:
-	Ray(const glm::vec3& pos, const glm::vec3& dir);
-	Ray(const glm::vec3& pos, const glm::vec3& dir, const float& distance = INFINITY);
+	Ray() {};
+	Ray(glm::vec3 pos, glm::vec3 dir);
+	Ray(glm::vec3 pos, glm::vec3 dir, const float& distance);
 	const glm::vec3& GetOrigin() const;
 	const glm::vec3& GetDirection() const;
 	const float& GetMaxRange() const;
 	const glm::vec3 PointOnLineAt(float magnitude) const;
+	void SetOrigin(glm::vec3 o);
+	void SetDirection(glm::vec3 d);
+
 	~Ray();
 private:
-	const glm::vec3 direction;
-	const glm::vec3 origin;
-	const float range;
+	glm::vec3 direction;
+	glm::vec3 origin;
+	float range;
 };
 

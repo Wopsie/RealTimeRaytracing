@@ -17,7 +17,7 @@ struct Transform {
 	}*/
 
 	void Translate(glm::vec3 translationVector) {
-		glm::translate(modelMat, translationVector);
+		modelMat = glm::translate(modelMat, translationVector);
 
 		/*modelMat *= glm::mat4(
 			glm::vec4(1, 0, 0, 0),

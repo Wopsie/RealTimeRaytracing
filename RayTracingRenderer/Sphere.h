@@ -34,15 +34,22 @@ public:
     float m_Radius2;
     glm::vec3 m_Position;
 
-    void IntersectSphere(float& a_T, const glm::vec3& a_Origin, const glm::vec3& a_Direction)
+    bool IntersectSphere(float& a_T, const glm::vec3& a_Origin, const glm::vec3& a_Direction)
     {
         glm::vec3 C = m_Position - a_Origin;
         float t = glm::dot(C, a_Direction);
         glm::vec3 Q = C - t * a_Direction;
         float p2 = glm::dot(Q, Q);
-        if (p2 > m_Radius2) return; // r2 = r * r
+
+        if (p2 > m_Radius2) 
+            return false; // r2 = r * r
+
         t -= sqrt(m_Radius2 - p2);
-        if ((t < a_T) && (t > 0)) a_T = t;
+        if ((t < a_T) && (t > 0)) {
+            a_T = t;
+            return true;
+        }
+        return false;
     }
 };
 
