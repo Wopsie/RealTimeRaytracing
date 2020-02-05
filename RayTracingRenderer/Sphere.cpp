@@ -120,6 +120,13 @@ Sphere::Sphere(glm::vec3 a_Position, float a_Radius)
     m_Radius2 = a_Radius * a_Radius;
 }
 
+Sphere::Sphere(glm::vec3 a_Position, float a_Radius, glm::vec3 a_Color)
+{
+    m_Position = a_Position;
+    m_Radius2 = a_Radius * a_Radius;
+    matColor = a_Color;
+}
+
 
 bool Sphere::GetIntersection(float& a_T, const Ray& ray)
 {

@@ -24,15 +24,20 @@
 #pragma once
 #include "Primitive.h"
 #include "glm/glm.hpp"
+#include <memory>
 
 class Sphere : public Primitive
 {
 public:
     Sphere(glm::vec3 a_Position, float a_Radius);
+    Sphere(glm::vec3 a_Position, float a_Radius, glm::vec3 a_Color);
     virtual ~Sphere() = default;
 
     float m_Radius2;
     glm::vec3 m_Position;
 
     bool GetIntersection(float& a_T, const Ray& ray);
+    glm::vec3 matColor = glm::vec3(1, 1, 1);
+
+protected:
 };

@@ -12,7 +12,7 @@ public:
 	std::shared_ptr<Transform> const GetTransform() { return transform; };
 	virtual bool GetIntersection(float& magnitude, const Ray& ray) = 0;
 
-private:
+protected:
 	std::shared_ptr<Transform> transform = std::make_shared<Transform>();
 };
 
