@@ -22,7 +22,7 @@ private:
 	glm::vec3 Trace(const Ray& ray, const LightSource& target);
 	
 	//const std::pair<float, std::shared_ptr<Primitive>> NearestIntersect(std::vector<std::shared_ptr<Primitive>> primitives, const Ray& r);
-	const float NearestIntersect(std::vector<std::shared_ptr<Primitive>> primitives, const Ray& r);
+	const float NearestIntersect(std::vector<std::shared_ptr<Primitive>> primitives, const Ray& r, IntersectionInfo& info);
 	glm::vec3 DirectIllumination(const IntersectionInfo& info);
 
 	void Draw();

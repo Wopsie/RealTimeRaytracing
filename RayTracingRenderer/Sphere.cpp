@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Sphere.h"
 #include "Ray.h"
+#include "IntersectionInfo.h"
 //#include "Ray.h"
 //#include "ShadingInfo.h"
 //#include "IntersectionInfo.h"
@@ -128,7 +129,7 @@ Sphere::Sphere(glm::vec3 a_Position, float a_Radius, glm::vec3 a_Color)
 }
 
 
-bool Sphere::GetIntersection(float& a_T, const Ray& ray)
+bool Sphere::GetIntersection(float& a_T, const Ray& ray) const
 {
     glm::vec3 C = m_Position - ray.GetOrigin();
     float t = glm::dot(C, ray.GetDirection());
@@ -140,9 +141,15 @@ bool Sphere::GetIntersection(float& a_T, const Ray& ray)
 
     t -= sqrt(m_Radius2 - p2);
     if ((t < a_T) && (t > 0)) {
-    //if ((t > 0)) {
         a_T = t;
         return true;
     }
     return false;
+}
+
+void Sphere::IntersectionDetails(const glm::vec3& collPos, IntersectionInfo& info) const
+{
+    //yes do something
+    collPos;
+    info.color = matColor;
 }
