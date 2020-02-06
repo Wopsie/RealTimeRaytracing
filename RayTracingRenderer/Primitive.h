@@ -5,6 +5,7 @@
 
 //struct Transform;
 class Ray;
+struct IntersectionInfo;
 
 class Primitive
 {

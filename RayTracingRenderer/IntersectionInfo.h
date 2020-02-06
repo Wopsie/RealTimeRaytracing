@@ -6,10 +6,12 @@ class Primitive;
 
 struct IntersectionInfo 
 {
-	IntersectionInfo(std::shared_ptr<Primitive> a_pPrimitive, float a_Magnitude) :
-		pPrimitive(a_pPrimitive),
-		intersectMagnitude(a_Magnitude)
+	IntersectionInfo(/*std::shared_ptr<Primitive> a_pPrimitive, */float a_Magnitude, glm::vec3 a_Normal) :
+		//pPrimitive(a_pPrimitive),
+		intersectMagnitude(a_Magnitude),
+		normal(a_Normal)
 	{}
-	const std::shared_ptr<Primitive> pPrimitive;
+	//const std::shared_ptr<Primitive> pPrimitive;
 	const float intersectMagnitude;
+	const glm::vec3 normal;
 };
