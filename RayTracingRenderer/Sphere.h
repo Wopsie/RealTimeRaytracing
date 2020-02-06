@@ -24,14 +24,15 @@
 #pragma once
 #include "Primitive.h"
 #include "glm/glm.hpp"
+#include "Material.h"
 #include <memory>
 
+struct Material;
 
 class Sphere : public Primitive
 {
 public:
-    Sphere(glm::vec3 a_Position, float a_Radius);
-    Sphere(glm::vec3 a_Position, float a_Radius, glm::vec3 a_Color);
+    Sphere(glm::vec3 a_Position, float a_Radius, Material& a_Material);
     virtual ~Sphere() = default;
 
     float m_Radius2;
@@ -42,7 +43,10 @@ public:
     glm::vec3 matColor = glm::vec3(1, 1, 1);
 
     //getset material
+    inline const Material& GetMaterial() const { return material; };
+    inline void SetMaterial(const Material& a_Material) { material = a_Material; };
 
 private:
     //Material
+    Material& material;
 };

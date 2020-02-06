@@ -1,6 +1,7 @@
 #pragma once
 #include "Primitive.h"
 #include "glm/glm.hpp"
+#include "Material.h"
 
 class Ray;
 struct IntersectionInfo;
@@ -14,4 +15,7 @@ public:
 private:
 	glm::vec3 normal = glm::vec3(0, 1, 0);
 	glm::vec3 origin = glm::vec3(0);
+
+	Material* black = new Material();
+	Material* white = new Material();
 };

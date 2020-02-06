@@ -8,6 +8,10 @@ Plane::Plane(glm::vec3 a_Origin, glm::vec3 a_Normal)
 {
 	origin = a_Origin;
 	normal = glm::normalize(a_Normal);
+
+	//temporary
+	white->albedo = glm::vec3(0.5f, 0.5f, 0.5f);
+	black->albedo = glm::vec3(0.1f, 0.1f, 0.1f);
 }
 
 const bool Plane::GetIntersection(float& magnitude, const Ray& ray) const
@@ -30,9 +34,9 @@ void Plane::IntersectionDetails(const glm::vec3& collPos, IntersectionInfo& info
 	int z = static_cast<int>(roundf(collPos.z));
 
 	if (!(x % 2) == !(z % 2)) {
-		info.color = glm::vec3(0.1f, 0.1f, 0.1f);
+		info.mat = *black;
 	}
 	else {
-		info.color = glm::vec3(0.5f, 0.5f, 0.5f);
+		info.mat = *white;
 	}
 }

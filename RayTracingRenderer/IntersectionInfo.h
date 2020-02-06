@@ -7,8 +7,7 @@ class Primitive;
 
 struct IntersectionInfo 
 {
-	float intersectMagnitude;
-	Material mat;
-	glm::vec3 normal;
-	glm::vec3 color;
+	float intersectMagnitude = -1.f;
+	Material mat = Material();
+	glm::vec3 normal = glm::vec3(0);
 };
