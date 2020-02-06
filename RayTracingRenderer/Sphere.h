@@ -36,7 +36,7 @@ public:
     float m_Radius2;
     glm::vec3 m_Position;
 
-    bool GetIntersection(float& a_T, const Ray& ray) const;
+    const bool GetIntersection(float& a_T, const Ray& ray) const;
     void IntersectionDetails(const glm::vec3& collPos, IntersectionInfo& info) const;
     glm::vec3 matColor = glm::vec3(1, 1, 1);
 

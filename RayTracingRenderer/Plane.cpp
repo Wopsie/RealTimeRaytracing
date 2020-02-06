@@ -1,91 +1,38 @@
 #include "stdafx.h"
-//#include "Plane.h"
-//#include "IntersectionInfo.h"
-//#include "ShadingInfo.h"
-//#include "Ray.h"
-//#include "Surface.h"
-//#include "Material.h"
-//#include <cmath>
-//
-//Plane::Plane()
-//	: Surface(1)
-//{
-//	position = glm::vec3();
-//	normal = glm::vec3(0, -1, 0);
-//}
-//
-//Plane::Plane(const glm::vec3 & pos, const glm::vec3 & inclination, const int& id, const Material & mat)
-//	: Surface(id)
-//{
-//	position = pos;
-//	normal = inclination;
-//	material = mat;
-//}
-//
-//Plane::Plane(const glm::vec3 & pos, const glm::vec3 & inclination, const int& id, const glm::vec3& ambient)
-//	: Surface(id)
-//{
-//	position = pos;
-//	normal = inclination;
-//	material = Material();
-//	material.color = ambient;
-//}
-//
-//bool Plane::GetShadingInfo(const Ray & ray, ShadingInfo & info) const
-//{
-//	info.hit = false;
-//	//check if intersection is happening at all
-//	float f = dot(normal, ray.GetDirection());
-//	if (f <= 0) 
-//	{
-//#pragma warning (push)
-//#pragma warning ( disable : 4244)
-//		float planeDot = dot(normal, position);
-//		float magnitude = dot(planeDot - normal, ray.GetOrigin()) / dot(normal, ray.GetDirection());
-//		if (magnitude < ray.GetMaxRange())
-//		{
-//			info.normal = normal;
-//			info.position = ray.PointOnLineAt(magnitude);
-//			info.distance = (ray.GetOrigin() - ray.PointOnLineAt(magnitude)).length();
-//			info.material = GetMaterial();
-//			info.surface = this;
-//			info.hit = true;
-//			info.renderable = true;
-//		}
-//	}
-//#pragma warning (pop)
-//	return info.hit;
-//}
-//
-//std::shared_ptr<IntersectionInfo> Plane::GetIntersection(const Ray& ray) const
-//{
-//	//check if intersection is happening at all
-//	float f = dot(normal, ray.GetDirection());
-//	if (f <= 0) 
-//	{
-//#pragma warning (push)
-//#pragma warning ( disable : 4244)
-//		float planeDot = dot(normal, position);
-//		float magnitude = dot(planeDot - normal, ray.GetOrigin()) / dot(normal, ray.GetDirection());
-//		if (magnitude < ray.GetMaxRange())
-//		{
-//			std::shared_ptr<IntersectionInfo> ii = std::make_shared<IntersectionInfo>();
-//			ii->pSurface = this;
-//			ii->distToRayOrigin = (ray.GetOrigin() - ray.PointOnLineAt(magnitude)).length();
-//			ii->intersectPos = ray.PointOnLineAt(magnitude);
-//			return ii;
-//		}
-//	}
-//#pragma warning (pop)
-//	return nullptr;
-//}
-//
-//const Material & Plane::GetMaterial() const
-//{
-//	return material;
-//}
-//
-//const int & Plane::GetIdentifier() const
-//{
-//	return objID;
-//}
+#include "Plane.h"
+#include "IntersectionInfo.h"
+#include "Ray.h"
+
+
+Plane::Plane(glm::vec3 a_Origin, glm::vec3 a_Normal)
+{
+	origin = a_Origin;
+	normal = glm::normalize(a_Normal);
+}
+
+const bool Plane::GetIntersection(float& magnitude, const Ray& ray) const
+{
+	const float denominator = glm::dot(ray.GetDirection(), normal);
+	if (const float t = glm::dot((origin - ray.GetOrigin()), normal) / denominator; t < magnitude && t > 0) {
+		magnitude = t;
+	}
+	return (magnitude > FLT_EPSILON);
+}
+
+void Plane::IntersectionDetails(const glm::vec3& collPos, IntersectionInfo& info) const
+{
+	info.normal = normal;
+	//collPos;
+	//round collpos to interger. Check with modulo if int is even or not. just alternate the colors based on that
+
+	//checkerboard business. Doesnt really work well when rotating plane. should use local coordinates
+	int x = static_cast<int>(roundf(collPos.x));
+	int z = static_cast<int>(roundf(collPos.z));
+
+	if (!(x % 2) == !(z % 2)) {
+		info.color = glm::vec3(0.1f, 0.1f, 0.1f);
+	}
+	else {
+		info.color = glm::vec3(0.5f, 0.5f, 0.5f);
+	}
+}

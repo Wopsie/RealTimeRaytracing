@@ -129,7 +129,7 @@ Sphere::Sphere(glm::vec3 a_Position, float a_Radius, glm::vec3 a_Color)
 }
 
 
-bool Sphere::GetIntersection(float& a_T, const Ray& ray) const
+const bool Sphere::GetIntersection(float& a_T, const Ray& ray) const
 {
     glm::vec3 C = m_Position - ray.GetOrigin();
     float t = glm::dot(C, ray.GetDirection());
@@ -150,6 +150,8 @@ bool Sphere::GetIntersection(float& a_T, const Ray& ray) const
 void Sphere::IntersectionDetails(const glm::vec3& collPos, IntersectionInfo& info) const
 {
     //yes do something
-    collPos;
     info.color = matColor;
+
+    //calculate the normal at the collpos. Basically just get direction from center to that point.
+    info.normal = glm::normalize((collPos - m_Position));
 }

@@ -8,6 +8,7 @@
 #include "glm/vec2.hpp"
 #include "Primitive.h"
 #include "Sphere.h"
+#include "Plane.h"
 
 class RayTracingRenderer
 {
@@ -27,8 +28,8 @@ private:
 
 	void Draw();
 
-	const bool CastRay(const glm::vec3& origin, const glm::vec3& direction, ShadingInfo& info, const float& maxDistance = INFINITY) const;
-	const bool CastRay(const glm::vec3& origin, const glm::vec3& direction, ShadingInfo& info, const int& excludedID, const float& maxDistance = INFINITY) const;
+	/*const bool CastRay(const glm::vec3& origin, const glm::vec3& direction, ShadingInfo& info, const float& maxDistance = INFINITY) const;
+	const bool CastRay(const glm::vec3& origin, const glm::vec3& direction, ShadingInfo& info, const int& excludedID, const float& maxDistance = INFINITY) const;*/
 	const bool Refract(glm::vec3& rayDirection, const glm::vec3& normal, const float& refIndex);
 	const glm::vec3 SurfaceShading(const ShadingInfo& info, const glm::vec3& rayOrigin = glm::vec3());
 	const float phongExponent = 256.0f;
@@ -49,4 +50,5 @@ private:
 	//test
 	//Sphere sphere = Sphere(glm::vec3(0, 0, 5), 0.5f);
 	std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(glm::vec3(0, 0, 5), 0.5f);
+	std::shared_ptr<Plane> plane = std::make_shared<Plane>(glm::vec3(0, -5, 0), glm::vec3(0, 1, 0));
 };

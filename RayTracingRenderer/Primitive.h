@@ -12,7 +12,7 @@ class Primitive
 {
 public:
 	std::shared_ptr<Transform> const GetTransform() { return transform; };
-	virtual bool GetIntersection(float& magnitude, const Ray& ray) const = 0;
+	virtual const bool GetIntersection(float& magnitude, const Ray& ray) const = 0;
 	virtual void IntersectionDetails(const glm::vec3& collPos, IntersectionInfo& info) const = 0;
 
 protected:
