@@ -26,6 +26,7 @@
 #include "glm/glm.hpp"
 #include <memory>
 
+
 class Sphere : public Primitive
 {
 public:
@@ -40,5 +41,8 @@ public:
     void IntersectionDetails(const glm::vec3& collPos, IntersectionInfo& info) const;
     glm::vec3 matColor = glm::vec3(1, 1, 1);
 
-protected:
+    //getset material
+
+private:
+    //Material
 };
