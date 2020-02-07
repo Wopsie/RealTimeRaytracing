@@ -19,9 +19,9 @@ private:
 	void Init();
 	void Tick();
 	void Render(const glm::mat4& camTrans);
-	glm::vec3 Trace(IntersectionInfo& info, const Ray& ray, const LightSource& target);
 	glm::vec3 Trace(IntersectionInfo& info, const Ray& ray);
-	glm::vec3 Sample(IntersectionInfo& info, Ray& ray);
+	//glm::vec3 Trace(IntersectionInfo& info, const Ray& ray, const LightSource& target);
+	glm::vec3 Sample(IntersectionInfo& info, Ray& ray, unsigned int& depth);
 	const glm::vec3 DiffuseReflection(const glm::vec3 normal);
 	//const std::pair<float, std::shared_ptr<Primitive>> NearestIntersect(std::vector<std::shared_ptr<Primitive>> primitives, const Ray& r);
 	const float NearestIntersect(std::vector<std::shared_ptr<Primitive>> primitives, const Ray& r, IntersectionInfo& info);
@@ -41,6 +41,7 @@ private:
 	int objectIdentifier = 1;
 	bool quitting = false;
 	sf::Image viewport;
+	sf::Texture texture;
 	sf::RenderWindow* window;
 	const glm::vec2 viewportSize = glm::vec2(512, 512);
 	Scene scene = Scene();
@@ -54,9 +55,10 @@ private:
 	Material lightMat = Material();
 
 	const glm::vec3 skyColor = glm::vec3(0.8f, 0.9f, 1);
-	std::shared_ptr<Sphere> sphere = std::make_shared<Sphere>(glm::vec3(0, 0, 5), 0.5f, diffuseWhite);
-	std::shared_ptr<Plane> plane = std::make_shared<Plane>(glm::vec3(0, -1, 0), glm::vec3(0, 1, 0));
+	std::shared_ptr<Plane> plane = std::make_shared<Plane>(glm::vec3(0, -0.5f, 0), glm::vec3(0, 1, 0));
 
 	const double PI = 3.141592653589793238463;
 	const float  PI_F = 3.14159265358979f;
+
+	int frameCounter = 0;
 };

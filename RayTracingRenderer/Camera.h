@@ -16,10 +16,11 @@ public:
 	void SetPosition(glm::vec3 pos);*/
 
 	std::shared_ptr<Transform> GetTransform() { return transform; };
+	//inline const bool& GetIsMoving() { return isMoving; };
+	bool isMoving = false;
 
 	//const glm::vec3& GetLookDirection();
 	~Camera();
-
 private:
 	//Transform transform;
 	std::shared_ptr<Transform> transform;
